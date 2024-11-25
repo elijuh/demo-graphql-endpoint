@@ -42,5 +42,17 @@ public class BookController {
         return bookRepository.save(book);
     }
 
+    @MutationMapping
+    public Book reassignAuthor(@Argument Long bookId, @Argument Long authorId) {
+        Book book = bookRepository.findById(bookId)
+            .orElseThrow(() -> new IllegalArgumentException("no book exists with id " + bookId));
+
+        Author author = authorRepository.findById(authorId)
+            .orElseThrow(() -> new IllegalArgumentException("no author exists with id " + authorId));
+
+        book.setAuthor(author);
+        return bookRepository.save(book);
+    }
+
     public record BookInput(String title, String publisher, Integer pageCount, Long authorId) {}
 }

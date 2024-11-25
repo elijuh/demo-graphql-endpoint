@@ -5,8 +5,9 @@ type Query {
 }
 
 type Mutation {
-    addBook(bookInput: BookInput): Book
-    addAuthor(authorInput: AuthorInput): Author
+    addBook(bookInput: BookInput!): Book
+    addAuthor(authorInput: AuthorInput!): Author
+    reassignAuthor(bookId: ID!, authorId: ID!): Book
 }
 
 input BookInput {
